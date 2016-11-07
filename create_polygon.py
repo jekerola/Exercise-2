@@ -19,34 +19,31 @@ ycoords = [63.748023986816406, 62.90789794921875, 60.511383056640625, 60.4449958
            68.84700012207031, 68.53485107421875, 67.69471740722656, 66.90360260009766, 65.70887756347656, 65.6533203125, 64.92096710205078, 64.22373962402344, 63.748023986816406]
 
 # P1. Create a list of x and y coordinate pairs out of xcoords and ycoords
-# ------------------------------------------------------------------------
-# Coordinate pair can be either a tuple or a list.
-# The first coordinate pair in the 'coordpairs' -list should look like: (29.99671173095703, 63.748023986816406)
-# Hint: you might want to iterate over items in the lists using a for-loop
+coordpairs = []
 
-coordpairs =
+for x, y in zip(xcoords,ycoords):
+    list = (x,y)
+    coordpairs.append(list)
 
 # P2. Create a shapely Polygon using the 'coordpairs' -list
-# ------------------------------------------------------------------------
-poly =
+poly = Polygon(coordpairs)
 
 # P3. Create an empty GeoDataFrame
-# ---------------------------------
-geo =
+geo = gpd.GeoDataFrame()
 
-# P4. Insert our 'poly' -polygon into the 'geo' GeoDataFrame using a column name 'geometry' 
-# ------------------------------------------------------------------------------------------
-# Hint: Take advantage of .loc -funtion
-geo.loc
+# Creating a new column called "geometry"
+geo['geometry'] = None
+
+# Insert the created polygon "poly" into the geometry -column
+geo.loc[0,'geometry'] = poly
 
 # P5. Save the GeoDataFrame into a new Shapefile called 'polygon.shp'
-# --------------------------------------------------------------------
-# Note: you do not need to define the coordinate reference system at this time
+outfp = r"/home/geo/polygon.shp"
+geo.to_file(outfp)
 
 
 # P6. Plot the polygon using taking advantage of the .plot() -function in GeoDataFrame. Save a PNG figure out of your plot and upload it to your GitHub repository.
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+geo.plot()
 
 
 
